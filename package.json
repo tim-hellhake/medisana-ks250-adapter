@@ -1,0 +1,42 @@
+{
+  "name": "medisana-ks250-adapter",
+  "display_name": "Medisana KS 250",
+  "version": "0.1.0",
+  "description": "Connect your Medisana KS 250",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tim-hellhake/medisana-ks250-adapter.git"
+  },
+  "author": "Tim Hellhake",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tim-hellhake/medisana-ks250-adapter/issues"
+  },
+  "homepage": "https://github.com/tim-hellhake/medisana-ks250-adapter#readme",
+  "files": [
+    "LICENSE",
+    "SHA256SUMS",
+    "index.js",
+    "medisana-ks250-adapter.js"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "{nodeLoader} {path}"
+  },
+  "dependencies": {
+    "@abandonware/noble": "^1.9.2-2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
+  }
+}
