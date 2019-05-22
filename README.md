@@ -6,7 +6,7 @@
 [![optionalDependencies](https://david-dm.org/tim-hellhake/medisana-ks250-adapter/optional-status.svg)](https://david-dm.org/tim-hellhake/medisana-ks250-adapter?type=optional)
 [![license](https://img.shields.io/badge/license-MPL--2.0-blue.svg)](LICENSE)
 
-Connect your Medisana KS250
+Connect your Medisana KS250 (kitchen scale).
 
 Configuration:
 - Turn on the KS 250
