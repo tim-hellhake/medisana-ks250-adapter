@@ -80,7 +80,10 @@ class MedisanaKS250Adapter extends Adapter {
   }
 
   async addPeripheral(peripheral) {
-    const id = peripheral.id;
+    const {
+      id
+    } = peripheral;
+
     let knownDevice = this.knownDevices[id];
 
     if (!knownDevice) {
