@@ -40,7 +40,9 @@ class MedisanaKS250 extends Device {
   }
 
   setData(manufacturerData) {
-    const length = manufacturerData.length;
+    const {
+      length
+    } = manufacturerData;
     const b0 = manufacturerData[length - 1];
     const b1 = manufacturerData[length - 2];
     const b2 = manufacturerData[length - 3];
