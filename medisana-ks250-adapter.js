@@ -40,21 +40,26 @@ class MedisanaKS250 extends Device {
   }
 
   setData(manufacturerData) {
+    const value = this.decodeData(manufacturerData);
+    const property = this.properties.get('weight');
+    property.setCachedValue(value);
+    this.notifyPropertyChanged(property);
+  }
+
+  decodeData(manufacturerData) {
     const {
       length
     } = manufacturerData;
+
     const b0 = manufacturerData[length - 1];
     const b1 = manufacturerData[length - 2];
     const b2 = manufacturerData[length - 3];
     const b3 = manufacturerData[length - 4];
     const b4 = manufacturerData[length - 5];
     const sign = (b4 & 0x8) ? -1 : 1;
-    // eslint-disable-next-line max-len
-    const value = sign * (((b3 & 0xf0) << 8) | ((b2 & 0xf0) << 4) | (b1 & 0xf0) | (b0 >> 4));
 
-    const property = this.properties.get('weight');
-    property.setCachedValue(value);
-    this.notifyPropertyChanged(property);
+    // eslint-disable-next-line max-len
+    return sign * (((b3 & 0xf0) << 8) | ((b2 & 0xf0) << 4) | (b1 & 0xf0) | (b0 >> 4));
   }
 }
 
