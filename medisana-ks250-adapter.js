@@ -22,7 +22,7 @@ class MedisanaKS250 extends Device {
     this.name = this.id;
     this.description = 'Medisana KS 250';
 
-    this.addProperty({
+    this.weightProperty = new Property(this, description.title, {
       type: 'number',
       '@type': 'LevelProperty',
       minimum: -5000,
@@ -32,18 +32,14 @@ class MedisanaKS250 extends Device {
       description: 'The measured weight',
       readOnly: true
     });
-  }
 
-  addProperty(description) {
-    const property = new Property(this, description.title, description);
-    this.properties.set(description.title, property);
+    this.properties.set('weight', this.weightProperty);
   }
 
   setData(manufacturerData) {
     const value = this.decodeData(manufacturerData);
-    const property = this.properties.get('weight');
-    property.setCachedValue(value);
-    this.notifyPropertyChanged(property);
+    this.weightProperty.setCachedValue(value);
+    this.notifyPropertyChanged(this.weightProperty);
   }
 
   decodeData(manufacturerData) {
