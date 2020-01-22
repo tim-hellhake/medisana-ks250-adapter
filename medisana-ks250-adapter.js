@@ -22,7 +22,7 @@ class MedisanaKS250 extends Device {
     this.name = this.id;
     this.description = 'Medisana KS 250';
 
-    this.weightProperty = new Property(this, description.title, {
+    this.weightProperty = new Property(this, 'weight', {
       type: 'number',
       '@type': 'LevelProperty',
       minimum: -5000,
