@@ -3,7 +3,7 @@
   "id": "medisana-ks250-adapter",
   "name": "Medisana KS 250",
   "short_name": "KS 250",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Connect your Medisana KS 250 (kitchen scale)",
   "homepage_url": "https://github.com/tim-hellhake/medisana-ks250-adapter#readme",
   "license": "MPL-2.0",
