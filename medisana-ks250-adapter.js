@@ -22,7 +22,7 @@ class MedisanaKS250 extends Device {
     this.name = this.id;
     this.description = 'Medisana KS 250';
 
-    this.addProperty({
+    this.weightProperty = new Property(this, 'weight', {
       type: 'number',
       '@type': 'LevelProperty',
       minimum: -5000,
@@ -32,27 +32,30 @@ class MedisanaKS250 extends Device {
       description: 'The measured weight',
       readOnly: true
     });
-  }
 
-  addProperty(description) {
-    const property = new Property(this, description.title, description);
-    this.properties.set(description.title, property);
+    this.properties.set('weight', this.weightProperty);
   }
 
   setData(manufacturerData) {
-    const length = manufacturerData.length;
+    const value = this.decodeData(manufacturerData);
+    this.weightProperty.setCachedValue(value);
+    this.notifyPropertyChanged(this.weightProperty);
+  }
+
+  decodeData(manufacturerData) {
+    const {
+      length
+    } = manufacturerData;
+
     const b0 = manufacturerData[length - 1];
     const b1 = manufacturerData[length - 2];
     const b2 = manufacturerData[length - 3];
     const b3 = manufacturerData[length - 4];
     const b4 = manufacturerData[length - 5];
     const sign = (b4 & 0x8) ? -1 : 1;
-    // eslint-disable-next-line max-len
-    const value = sign * (((b3 & 0xf0) << 8) | ((b2 & 0xf0) << 4) | (b1 & 0xf0) | (b0 >> 4));
 
-    const property = this.properties.get('weight');
-    property.setCachedValue(value);
-    this.notifyPropertyChanged(property);
+    // eslint-disable-next-line max-len
+    return sign * (((b3 & 0xf0) << 8) | ((b2 & 0xf0) << 4) | (b1 & 0xf0) | (b0 >> 4));
   }
 }
 

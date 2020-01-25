@@ -1,7 +1,7 @@
 {
   "name": "medisana-ks250-adapter",
   "display_name": "Medisana KS 250",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Connect your Medisana KS 250 (kitchen scale)",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "files": [
     "LICENSE",
     "SHA256SUMS",
+    "manifest.json",
     "index.js",
     "medisana-ks250-adapter.js"
   ],
@@ -33,10 +34,10 @@
     "exec": "{nodeLoader} {path}"
   },
   "dependencies": {
-    "@abandonware/noble": "^1.9.2-2"
+    "@abandonware/noble": "^1.9.2-5"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0"
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0"
   }
 }
