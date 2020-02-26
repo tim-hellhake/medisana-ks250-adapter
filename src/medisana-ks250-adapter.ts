@@ -6,16 +6,14 @@
 
 'use strict';
 
-const noble = require('@abandonware/noble');
+import { Adapter, Device, Property } from 'gateway-addon';
 
-const {
-  Adapter,
-  Device,
-  Property
-} = require('gateway-addon');
+import noble, { Peripheral } from '@abandonware/noble';
 
 class MedisanaKS250 extends Device {
-  constructor(adapter, id) {
+  private weightProperty: Property;
+
+  constructor(adapter: Adapter, id: string) {
     super(adapter, `${MedisanaKS250.name}-${id}`);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
     this['@type'] = ['MultiLevelSensor'];
@@ -36,13 +34,13 @@ class MedisanaKS250 extends Device {
     this.properties.set('weight', this.weightProperty);
   }
 
-  setData(manufacturerData) {
+  setData(manufacturerData: Buffer) {
     const value = this.decodeData(manufacturerData);
     this.weightProperty.setCachedValue(value);
     this.notifyPropertyChanged(this.weightProperty);
   }
 
-  decodeData(manufacturerData) {
+  decodeData(manufacturerData: Buffer) {
     const {
       length
     } = manufacturerData;
@@ -59,11 +57,11 @@ class MedisanaKS250 extends Device {
   }
 }
 
-class MedisanaKS250Adapter extends Adapter {
-  constructor(addonManager, manifest) {
+export class MedisanaKS250Adapter extends Adapter {
+  private knownDevices: { [key: string]: MedisanaKS250 } = {};
+
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, MedisanaKS250Adapter.name, manifest.name);
-    this.pollInterval = manifest.moziot.config.pollInterval;
-    this.knownDevices = {};
     addonManager.addAdapter(this);
 
     noble.on('stateChange', (state) => {
@@ -82,7 +80,7 @@ class MedisanaKS250Adapter extends Adapter {
     });
   }
 
-  async addPeripheral(peripheral) {
+  async addPeripheral(peripheral: Peripheral) {
     const {
       id
     } = peripheral;
@@ -101,5 +99,3 @@ class MedisanaKS250Adapter extends Adapter {
     }
   }
 }
-
-module.exports = MedisanaKS250Adapter;
