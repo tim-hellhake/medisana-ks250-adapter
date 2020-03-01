@@ -52,7 +52,6 @@ class MedisanaKS250 extends Device {
     const b4 = manufacturerData[length - 5];
     const sign = (b4 & 0x8) ? -1 : 1;
 
-    // eslint-disable-next-line max-len
     return sign * (((b3 & 0xf0) << 8) | ((b2 & 0xf0) << 4) | (b1 & 0xf0) | (b0 >> 4));
   }
 }
