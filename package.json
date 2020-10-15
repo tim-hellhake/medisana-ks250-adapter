@@ -1,7 +1,7 @@
 {
   "name": "medisana-ks250-adapter",
   "display_name": "Medisana KS 250",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Connect your Medisana KS 250 (kitchen scale)",
   "main": "lib/index.js",
   "scripts": {
